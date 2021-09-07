@@ -58,6 +58,33 @@ private:
 		}
 
 	}
+	bool BinarySearch(node* nodeptr, int num)
+	{
+		bool isFound = false;
+		if (num < nodeptr->data)
+		{
+			while (nodeptr != nullptr)
+			{
+				if (nodeptr->data == num)
+				{
+					isFound = true;
+				}
+				nodeptr = nodeptr->left;
+			}
+		}
+		else
+		{
+			while (nodeptr != nullptr)
+			{
+				if (nodeptr->data == num)
+				{
+					isFound = true;
+				}
+				nodeptr = nodeptr->right;
+			}
+		}
+		return isFound;
+	}
 public:
 	
 	void insertNodePublic(int data)
@@ -68,12 +95,20 @@ public:
 	{
 		DisplayInOrder(root);
 	}
+	bool BinarySearchPublic(int num)
+	{
+		bool isFound = false;
+		isFound = BinarySearch( root,num);
+		return isFound;
+	}
 };
 
 
 
 int main()
 {
+	int userInput;
+	bool isFound;
 	BinaryTree Tree;
 	Tree.insertNodePublic(5);
 	Tree.insertNodePublic(1);
@@ -82,8 +117,24 @@ int main()
 	Tree.insertNodePublic(85);
 	Tree.insertNodePublic(12);
 	Tree.insertNodePublic(3);
+	Tree.insertNodePublic(24);
+	Tree.insertNodePublic(99);
+	Tree.insertNodePublic(2);
+	Tree.insertNodePublic(500);
 	
 	Tree.DisplayInOrderPublic();
+
+	cout << "What number would you like to find in this tree ?" << endl;
+	cin >> userInput;
+	isFound = Tree.BinarySearchPublic(userInput);
+	if (isFound == true)
+	{
+		cout << "The searched number "<<userInput<< " " << "is in the tree!" << endl;
+	}
+	else
+	{
+		cout << "The searched number " << userInput << " " << "is not in the tree!" << endl;
+	}
 	system("PAUSE");
 
 }
